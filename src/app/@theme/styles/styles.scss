@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
 
+@import "@webpixels/css/core/functions";
 // themes - our custom or/and out of the box themes
 @import 'themes';
 
@@ -7,10 +8,11 @@
 @import '~@nebular/theme/styles/globals';
 @import '~@nebular/auth/styles/globals';
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
-@import '~bootstrap/scss/grid';
+// Webpixels' CSS
+@import "@webpixels/css/base";
+@import "@webpixels/css/forms";
+@import "@webpixels/css/components";
+@import "@webpixels/css/utilities";
 
 // loading progress bar theme
 @import './pace.theme';

@@ -17,4 +17,7 @@ export const GqlConstants = {
         }
     }
     `,
+    RESEND_LOGIN_OTP: ``,
+    REQUEST_LOGIN_OTP: ``,
+    VERIFY_LOGIN_OTP: ``,
 };

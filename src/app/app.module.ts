@@ -20,9 +20,12 @@ import {
   NbToastrModule,
   NbWindowModule,
 } from '@nebular/theme';
+import { PrivateComponent } from './layouts/private/private.component';
+import { PrivateGuard } from './guards/private-guard';
+import { PublicGuard } from './guards/public-guard';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, PrivateComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -39,6 +42,10 @@ import {
     }),
     CoreModule.forRoot(),
     ThemeModule.forRoot(),
+  ],
+  providers: [
+    PrivateGuard,
+    PublicGuard,
   ],
   bootstrap: [AppComponent],
 })

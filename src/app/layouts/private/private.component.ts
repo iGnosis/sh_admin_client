@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-private',
@@ -7,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PrivateComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     document.getElementById('nb-global-spinner').style.display = 'none';
+  }
+
+  logout() {
+    localStorage.clear();
+    this.router.navigate(['/public/login']);
   }
 
 }

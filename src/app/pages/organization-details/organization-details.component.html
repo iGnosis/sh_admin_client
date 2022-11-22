@@ -1,0 +1,39 @@
+<!-- Header -->
+<header class="px-3 px-lg-7 pt-7 custom_header bg-white">
+    <div class="container-xl">
+      <div>
+        <div class="row custom_alignment p-5">
+          <div class="col-md-6 col-12 mb-3 mb-md-0">
+            <!-- Title -->
+            <xng-breadcrumb separator=">"></xng-breadcrumb>
+            <router-outlet></router-outlet>
+            <h1 class="h2 mb-0 ls-tight heading_text mt-5 text-primary">{{'Arbor Acres'}}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+<div class="container my-5 row">
+    <div class="card shadow-3 col-8 offset-2">
+        <div class="card-header d-flex align-items-center">
+          <!-- Title -->
+          <h5>Account Details</h5>
+          <!-- Button -->
+          <div class="ms-auto">
+            <a routerLink="edit" class="btn btn-sm btn-neutral ms-2 text-primary">
+              <i class="bi bi-pencil-square"></i>&nbsp;Edit Account Details
+            </a>
+          </div>
+        </div>
+        <div class="card-body pt-0">
+          <!-- Placeholder -->
+          <div>
+            <p class="mb-5">Name: <b>{{'Arbor Acres'}}</b></p>
+            <p class="mb-5">Type: <b>{{'Senior Care Facility'}}</b></p>
+            <p class="mb-5">E-mail: <b>{{'arboracres@gmail.com'}}</b></p>
+            <p>Phone Number: <b>{{'23234234'}}</b></p>
+          </div>
+        </div>
+      </div>
+</div>

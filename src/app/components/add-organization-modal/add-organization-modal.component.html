@@ -1,0 +1,51 @@
+
+  <div class="modal animated fadeIn" [class.show]="showOrganizationModal" id="modal_example" tabindex="-1" aria-labelledby="modal_example" aria-hidden="true" style="background-color: rgba(0,0,0,0.4);">
+    <div class="modal-dialog modal-dialog-centered"style="max-width: 50vw;">
+      <div class="modal-content shadow-3">
+        
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title text-primary">Send Form</h3>
+          <p class="mt-2 text-sm text-black">Send an invite or custom link to the organisation to enter details.</p>
+        </div>
+        <div class="text-xs ms-auto mb-auto">
+          <button (click)="toggleShowModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+      </div>
+        <div class="modal-body border-bottom">
+          <div class="">
+            <div class="input-group input-group-inline">
+              <input type="email" class="form-control" placeholder="Enter e-mails, comma separated" aria-label="email" aria-describedby="">
+              <button class="btn btn-primary ps-5">Send Invite</button>
+            </div>
+          </div>
+        </div>
+        <div class="modal-body">
+          <h5 class="modal-title">Link</h5>
+          <div class="my-2">
+            <div class="input-group input-group-inline">
+              <input type="email" class="form-control" placeholder="username" value="https://docs.soundhealth.com/forms/Tsdfjnn87dbvn" aria-label="username" aria-describedby="">
+              <span class="input-group-text cursor-pointer" id="">
+                COPY
+              </span>
+            </div>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" [checked]="linkExpiry" (change)="linkExpiry = !linkExpiry" type="checkbox" name="check_example" id="check_example">
+            <label class="form-check-label" for="check_example">
+              Link Expiry
+            </label>
+          </div>
+          <div class="my-2" *ngIf="linkExpiry">
+            <h6 class="modal-title">Choose expiry date</h6>
+            <select class="form-select mt-2" name="expiry" id="expiry">
+              <option value="0" disabled selected>Choose date</option>
+              <option value="1">In 1 day</option>
+              <option value="7">In 1 week</option>
+              <option value="14">In 2 weeks</option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

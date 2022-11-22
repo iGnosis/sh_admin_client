@@ -5,6 +5,8 @@ import { PublicGuard } from './guards/public-guard';
 import { PrivateGuard } from './guards/private-guard';
 import { LoginComponent } from './pages/login/login.component';
 import { PrivateComponent } from './layouts/private/private.component';
+import { OrganizationDetailsComponent } from './pages/organization-details/organization-details.component';
+import { EditOrganizationComponent } from './pages/edit-organization/edit-organization.component';
 
 export const routes: Routes = [
   {
@@ -19,8 +21,30 @@ export const routes: Routes = [
     ]
   },
   {
-    path: 'app', component: PrivateComponent, canActivateChild: [PrivateGuard], children: [
-      { path: 'organizations', component: OrganizationsComponent, },
+    path: 'app', component: PrivateComponent, canActivateChild: [PrivateGuard], 
+    data: {
+      breadcrumb: {
+        label: 'Home',
+        info: 'Home',
+        routeInterceptor: ()=> {
+          return '/app/organizations';
+        }
+      },
+    },
+    children: [
+      { path: 'organizations', data: { breadcrumb: 'Organizations' }, component: OrganizationsComponent },
+      { 
+        path: 'organization', data: { breadcrumb: 'Organizations' },
+        children: [
+          { path: '', redirectTo: '/app/organizations', pathMatch: 'full' },
+          { 
+              path: ':id', children: [
+                { path: '', component: OrganizationDetailsComponent, pathMatch: 'full' },
+                { path: 'edit', component: EditOrganizationComponent, data: { breadcrumb: 'Edit Account Details' } },
+            ] 
+          },
+        ] 
+      },
     ],
   },
 ];

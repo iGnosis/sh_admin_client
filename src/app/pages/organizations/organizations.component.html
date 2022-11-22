@@ -5,6 +5,7 @@
       <div class="row custom_alignment p-5">
         <div class="col-md-6 col-12 mb-3 mb-md-0">
           <!-- Title -->
+          <xng-breadcrumb separator=">"></xng-breadcrumb>
           <router-outlet></router-outlet>
           <h1 class="h2 mb-0 ls-tight heading_text mt-5 text-primary">Sound Health Organizations</h1>
         </div>
@@ -30,17 +31,17 @@
         </span>
         <input type="text" class="form-control" placeholder="Search Organizations" aria-label="Search" aria-describedby="">
         </div>
-        <img src="/assets/images/filter_icon.svg" class="mx-2"/>
-        <img src="/assets/images/setting.svg" class="filter_align mx-2"/>
+        <!-- <img src="/assets/images/filter_icon.svg" class="mx-2"/>
+        <img src="/assets/images/setting.svg" class="filter_align mx-2"/> -->
       </div>
   </div>
   <!-- Organizations list -->
   <div class="card shadow-none m-5">
       <div class="d-flex align-items-center px-5 py-3">
           <h4>Organization List</h4>
-          <p class="ms-auto">1-9 of 9</p>
+          <!-- <p class="ms-auto">1-9 of 9</p>
           <button class="btn"><i class="bi bi-chevron-left"></i></button>
-          <button class="btn"><i class="bi bi-chevron-right"></i></button>
+          <button class="btn"><i class="bi bi-chevron-right"></i></button> -->
       </div>
       <div class="table-responsive">
           <table class="table table-hover table-nowrap">
@@ -67,7 +68,7 @@
                   </div>
                 </td>
                 <td>
-                  <a class="text-heading font-semibold" href="#">
+                  <a class="text-heading font-semibold" routerLink="/app/organization/arboracres">
                     {{'Arbor Acres'}}
                   </a>
                 </td>
@@ -101,53 +102,4 @@
       </div>
   </div>
   <!-- Add Organization Modal -->
-  <div class="modal" [class.show]="showOrganizationModal" id="modal_example" tabindex="-1" aria-labelledby="modal_example" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered"style="max-width: 50vw;">
-      <div class="modal-content shadow-3">
-        
-      <div class="modal-header">
-        <div>
-          <h3 class="modal-title">Send Form</h3>
-          <p class="mt-2 text-sm text-black">Send an invite or custom link to the organisation to enter details.</p>
-        </div>
-        <div class="text-xs ms-auto mb-auto">
-          <button (click)="toggleShowModal()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-      </div>
-        <div class="modal-body border-bottom">
-          <div class="">
-            <div class="input-group input-group-inline">
-              <input type="email" class="form-control" placeholder="Enter e-mails, comma separated" aria-label="email" aria-describedby="">
-              <button class="btn btn-primary ps-5">Send Invite</button>
-            </div>
-          </div>
-        </div>
-        <div class="modal-body">
-          <h5 class="modal-title">Link</h5>
-          <div class="my-2">
-            <div class="input-group input-group-inline">
-              <input type="email" class="form-control" placeholder="username" value="https://docs.soundhealth.com/forms/Tsdfjnn87dbvn" aria-label="username" aria-describedby="">
-              <span class="input-group-text cursor-pointer" id="">
-                COPY
-              </span>
-            </div>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" [checked]="linkExpiry" (change)="linkExpiry = !linkExpiry" type="checkbox" name="check_example" id="check_example">
-            <label class="form-check-label" for="check_example">
-              Link Expiry
-            </label>
-          </div>
-          <div class="my-2" *ngIf="linkExpiry">
-            <h6 class="modal-title">Choose expiry date</h6>
-            <select class="form-select mt-2" name="expiry" id="expiry">
-              <option value="0" disabled selected>Choose date</option>
-              <option value="1">In 1 day</option>
-              <option value="7">In 1 week</option>
-              <option value="14">In 2 weeks</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <add-organization-modal [showOrganizationModal]="showOrganizationModal" (modalStateChange)="toggleShowModal()"></add-organization-modal>

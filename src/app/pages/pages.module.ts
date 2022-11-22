@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NbMenuModule } from '@nebular/theme';
+import { NbIconModule, NbMenuModule } from '@nebular/theme';
 
 import { ThemeModule } from '../@theme/theme.module';
 import { PagesComponent } from './pages.component';
@@ -9,6 +9,11 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { MiscellaneousModule } from './miscellaneous/miscellaneous.module';
 import { OrganizationsComponent } from './organizations/organizations.component';
 import { LoginComponent } from './login/login.component';
+import { AddOrganizationModalComponent } from '../components/add-organization-modal/add-organization-modal.component';
+import { BreadcrumbModule } from 'xng-breadcrumb';
+import { OrganizationDetailsComponent } from './organization-details/organization-details.component';
+import { EditOrganizationComponent } from './edit-organization/edit-organization.component';
+import { NbEvaIconsModule } from '@nebular/eva-icons';
 
 @NgModule({
   imports: [
@@ -18,11 +23,17 @@ import { LoginComponent } from './login/login.component';
     DashboardModule,
     ECommerceModule,
     MiscellaneousModule,
+    BreadcrumbModule,
+    NbEvaIconsModule,
+    NbIconModule
   ],
   declarations: [
     PagesComponent,
     OrganizationsComponent,
     LoginComponent,
+    AddOrganizationModalComponent,
+    OrganizationDetailsComponent,
+    EditOrganizationComponent,
   ],
 })
 export class PagesModule {

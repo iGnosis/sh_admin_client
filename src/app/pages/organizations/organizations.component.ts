@@ -9,7 +9,6 @@ import { ApiService } from '../../services/api/api.service';
 export class OrganizationsComponent implements OnInit {
   isShowFilter = false;
   showOrganizationModal = false;
-  linkExpiry = false;
 
   constructor(private apiService: ApiService) { }
 

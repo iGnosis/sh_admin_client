@@ -29,7 +29,7 @@
         <span class="input-group-text pe-2">
           <i class="bi bi-search"></i>
         </span>
-        <input type="text" class="form-control" placeholder="Search Organizations" aria-label="Search" aria-describedby="">
+        <input type="text" class="form-control" placeholder="Search Organizations" aria-label="Search" [(ngModel)]="searchQuery" (ngModelChange)="searchOrganization()">
         </div>
         <!-- <img src="/assets/images/filter_icon.svg" class="mx-2"/>
         <img src="/assets/images/setting.svg" class="filter_align mx-2"/> -->
@@ -60,40 +60,29 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr *ngFor="let organization of filteredOrganizations" class="cursor-pointer">
                 <td class="text-lg" scope="col">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" value="" id="flexCheckRow1">
                     <label class="form-check-label" for="flexCheckRow1"></label>
                   </div>
                 </td>
-                <td>
-                  <a class="text-heading font-semibold" routerLink="/app/organization/arboracres">
-                    {{'Arbor Acres'}}
+                <td [routerLink]="'/app/organization/' + organization.id">
+                  <a class="text-heading font-semibold">
+                    {{ organization.name | titlecase }}
                   </a>
                 </td>
                 <td>
-                  <span>{{2}}</span>
+                  <span>{{ organization.staffs_aggregate.aggregate.count }}</span>
                 </td>
                 <td>
-                  <span>{{3}}</span>
+                  <span>{{ organization.patients_aggregate.aggregate.count }}</span>
                 </td>
                 <td class="text-end">
                   <div class="dropdown">
                     <p class="text-muted" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                       <i class="bi bi-three-dots-vertical"></i>
                     </p>
-                    <div class="dropdown-menu dropdown-menu-end">
-                      <a href="#!" class="dropdown-item">
-                        Action
-                      </a>
-                      <a href="#!" class="dropdown-item">
-                        Another action
-                      </a>
-                      <a href="#!" class="dropdown-item">
-                        Something else here
-                      </a>
-                    </div>
                   </div>
                 </td>
               </tr>

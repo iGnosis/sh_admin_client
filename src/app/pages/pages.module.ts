@@ -14,6 +14,7 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
 import { OrganizationDetailsComponent } from './organization-details/organization-details.component';
 import { EditOrganizationComponent } from './edit-organization/edit-organization.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
@@ -25,7 +26,8 @@ import { NbEvaIconsModule } from '@nebular/eva-icons';
     MiscellaneousModule,
     BreadcrumbModule,
     NbEvaIconsModule,
-    NbIconModule
+    NbIconModule,
+    FormsModule
   ],
   declarations: [
     PagesComponent,

@@ -7,7 +7,7 @@
             <!-- Title -->
             <xng-breadcrumb separator=">"></xng-breadcrumb>
             <router-outlet></router-outlet>
-            <h1 class="h2 mb-0 ls-tight heading_text mt-5 text-primary">{{'Arbor Acres'}}</h1>
+            <h1 class="h2 mb-0 ls-tight heading_text mt-5 text-primary">{{organization.name | titlecase}}</h1>
           </div>
         </div>
       </div>
@@ -27,12 +27,9 @@
           </div>
         </div>
         <div class="card-body pt-0">
-          <!-- Placeholder -->
           <div>
-            <p class="mb-5">Name: <b>{{'Arbor Acres'}}</b></p>
-            <p class="mb-5">Type: <b>{{'Senior Care Facility'}}</b></p>
-            <p class="mb-5">E-mail: <b>{{'arboracres@gmail.com'}}</b></p>
-            <p>Phone Number: <b>{{'23234234'}}</b></p>
+            <p class="mb-5">Name: <b>{{organization.name}}</b></p>
+            <p class="mb-5">Type: <b>{{organization.type}}</b></p>
           </div>
         </div>
       </div>

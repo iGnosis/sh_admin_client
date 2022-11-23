@@ -9,6 +9,9 @@ import { ApiService } from '../../services/api/api.service';
 export class OrganizationsComponent implements OnInit {
   isShowFilter = false;
   showOrganizationModal = false;
+  organizations = [];
+  filteredOrganizations = [];
+  searchQuery: string;
 
   constructor(private apiService: ApiService) { }
 
@@ -19,11 +22,18 @@ export class OrganizationsComponent implements OnInit {
 
   async getOrganizationsList() {
     const result = await this.apiService.getOrganizationsList();
-    console.log('result: ', result);
+    if (!result.organization) return;
+
+    this.organizations = result.organization;
+    this.filteredOrganizations = this.organizations;
   }
 
   toggleShowModal() {
     this.showOrganizationModal = !this.showOrganizationModal;
+  }
+
+  searchOrganization() {
+    this.filteredOrganizations = this.organizations.filter((organization) => organization.name.includes(this.searchQuery));
   }
 
 }

@@ -12,7 +12,7 @@ export class GqlClientService {
     const additionalHeaders = {
       'x-pointmotion-user-type': 'staff',
     };
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('accessToken');
 
     this.client = new GraphQLClient(environment.gqlEndpoint, {
       headers: Object.assign({
@@ -33,7 +33,7 @@ export class GqlClientService {
     const additionalHeaders = {
       'x-pointmotion-user-type': 'staff',
     };
-    const token = jwt || localStorage.getItem('token');
+    const token = jwt || localStorage.getItem('accessToken');
     if (token) {
       this.client = new GraphQLClient(environment.gqlEndpoint, {
         headers: Object.assign({
@@ -48,10 +48,19 @@ export class GqlClientService {
    * Used to make a query to the graphql server
    *
    * @param {string} request
-   * @param {{ [key: string]: any } | undefined} variables?
+   * @param {{ [key: string]: any }} variables?
+   * @param {boolean} auth?
    * @returns {Promise<any>}
    */
-  async req(request: string, variables?: { [key: string]: any }): Promise<any> {
-    return this.client.request(request, variables);
+  async req(request: string, variables?: { [key: string]: any }, auth = true): Promise<any> {
+    if (auth) return this.client.request(request, variables);
+    else {
+      const publicClient = new GraphQLClient(environment.gqlEndpoint, {
+        headers: Object.assign({}, {
+          'x-pointmotion-user-type': 'staff',
+        }),
+      });
+      return publicClient.request(request, variables);
+    }
   }
 }

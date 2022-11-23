@@ -4,6 +4,7 @@ import { GqlConstants } from '../../gql-constants';
 import { ApiService } from '../../services/api/api.service';
 import { JwtService } from '../../services/jwt/jwt.service';
 import { phone } from 'phone';
+import { GqlClientService } from '../../services/gql-client/gql-client.service';
 
 @Component({
   selector: 'ngx-login',
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
     private apiService: ApiService,
     private router: Router,
     private jwtService: JwtService,
+    private gqlClientService: GqlClientService,
   ) { }
 
   ngOnInit(): void {
@@ -164,6 +166,8 @@ export class LoginComponent implements OnInit {
       //   id: userId,
       // });
       console.log('user set successfully');
+
+      this.gqlClientService.refreshClient();
 
       this.router.navigate(['/app/organizations']);
     }

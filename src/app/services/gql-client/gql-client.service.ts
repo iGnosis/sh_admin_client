@@ -9,12 +9,18 @@ export class GqlClientService {
   private client: GraphQLClient;
 
   constructor() {
+    const additionalHeaders = {
+      'x-pointmotion-user-type': 'staff',
+    };
     const token = localStorage.getItem('token');
+
     this.client = new GraphQLClient(environment.gqlEndpoint, {
-      headers: {
-        authorization: 'Bearer ' + token,
+      headers: Object.assign({
+          Authorization: 'Bearer ' + token,
+          ...additionalHeaders,
+        }),
       },
-    });
+    );
   }
 
   /**
@@ -24,12 +30,16 @@ export class GqlClientService {
    * @returns {void}
    */
   refreshClient(jwt?: string) {
+    const additionalHeaders = {
+      'x-pointmotion-user-type': 'staff',
+    };
     const token = jwt || localStorage.getItem('token');
     if (token) {
       this.client = new GraphQLClient(environment.gqlEndpoint, {
-        headers: {
-          authorization: 'Bearer ' + token,
-        },
+        headers: Object.assign({
+          Authorization: 'Bearer ' + token,
+          ...additionalHeaders,
+        }),
       });
     }
   }

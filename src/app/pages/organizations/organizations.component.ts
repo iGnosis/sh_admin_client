@@ -33,7 +33,7 @@ export class OrganizationsComponent implements OnInit {
   }
 
   searchOrganization() {
-    this.filteredOrganizations = this.organizations.filter((organization) => organization.name.includes(this.searchQuery));
+    this.filteredOrganizations = this.organizations.filter((organization) => organization.name.toLowerCase().includes(this.searchQuery.toLowerCase()));
   }
 
 }

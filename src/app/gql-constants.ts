@@ -23,6 +23,30 @@ export const GqlConstants = {
         }
       }
     }`,
+    GENERATE_ORGANIZATION_INVITE_CODE: `
+    query GenerateOrganizationInviteCode {
+      generateOrganizationInviteCode {
+        data {
+          inviteCode
+        }
+      }
+    }
+    `,
+    UPDATE_INVITATION_CODE_EXPIRY: `
+    mutation UpdateInvitationCodeExpiry($expiryAt: timestamptz = "", $inviteCode: uuid = "") {
+      update_invite_organization(where: {inviteCode: {_eq: $inviteCode}}, _set: {expiryAt: $expiryAt}) {
+        affected_rows
+      }
+    }
+    `,
+    SEND_ORGANIZATION_INVITE: `
+    mutation SendOrganizationInviteViaEmail($email: String!, $redirectUrl: String!) {
+      inviteOrganizationViaEmail(email: $email, redirectUrl: $redirectUrl) {
+        data {
+          message
+        }
+      }
+    }`,
     GET_ORGANIZATIONS_LIST: `
     query Organizations($offset: Int = 0, $limit: Int = 10) {
         organization {

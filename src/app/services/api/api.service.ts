@@ -31,6 +31,24 @@ export class ApiService {
     }, false);
   }
 
+  async generateOrganizationInviteCode(): Promise<any> {
+    return this.client.req(GqlConstants.GENERATE_ORGANIZATION_INVITE_CODE);
+  }
+
+  async updateInvitationCodeExpiry(inviteCode: string, expiryAt: string): Promise<any> {
+    return this.client.req(GqlConstants.UPDATE_INVITATION_CODE_EXPIRY, {
+      inviteCode,
+      expiryAt,
+    });
+  }
+
+  async sendOrganizationInvite(email: string, redirectUrl: string): Promise<any> {
+    return this.client.req(GqlConstants.SEND_ORGANIZATION_INVITE, {
+      email,
+      redirectUrl,
+    });
+  }
+
   async getOrganizationsList(limit?: number, offset?: number): Promise<any> {
     return this.client.req(GqlConstants.GET_ORGANIZATIONS_LIST, {
       offset,

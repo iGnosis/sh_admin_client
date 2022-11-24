@@ -15,8 +15,8 @@
         <div class="modal-body border-bottom">
           <div class="">
             <div class="input-group input-group-inline">
-              <input type="email" class="form-control" placeholder="Enter e-mails, comma separated" aria-label="email" aria-describedby="">
-              <button class="btn btn-primary ps-5">Send Invite</button>
+              <input type="text" class="form-control" placeholder="Enter e-mails, comma separated" aria-label="email" [(ngModel)]="emails" (ngModelChange)="validateEmail()">
+              <button class="btn btn-primary ps-5" (click)="sendInvite()" [disabled]="hasInvited || !isEmailValid">{{ hasInvited ? 'Sent' : 'Send Invite'}}</button>
             </div>
           </div>
         </div>
@@ -24,8 +24,8 @@
           <h5 class="modal-title">Link</h5>
           <div class="my-2">
             <div class="input-group input-group-inline">
-              <input type="email" class="form-control" placeholder="username" value="https://docs.soundhealth.com/forms/Tsdfjnn87dbvn" aria-label="username" aria-describedby="">
-              <span class="input-group-text cursor-pointer" id="">
+              <input type="text" class="form-control" placeholder="username" [value]="redirectURL + inviteCode" aria-label="username" readonly>
+              <span class="input-group-text cursor-pointer" id="" (click)="copyInviteLink()">
                 COPY
               </span>
             </div>
@@ -38,7 +38,7 @@
           </div>
           <div class="my-2" *ngIf="linkExpiry">
             <h6 class="modal-title">Choose expiry date</h6>
-            <select class="form-select mt-2" name="expiry" id="expiry">
+            <select class="form-select mt-2" name="expiry" id="expiry" [(ngModel)]="expiryPeriod" (ngModelChange)="updateLinkExpiry()">
               <option value="0" disabled selected>Choose date</option>
               <option value="1">In 1 day</option>
               <option value="7">In 1 week</option>

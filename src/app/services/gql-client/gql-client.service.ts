@@ -7,17 +7,18 @@ import { environment } from '../../../environments/environment';
 })
 export class GqlClientService {
   private client: GraphQLClient;
+  private additionalHeaders = {
+    'x-pointmotion-user-type': 'staff',
+    'x-organization-name': environment.organizationName,
+  };
 
   constructor() {
-    const additionalHeaders = {
-      'x-pointmotion-user-type': 'staff',
-    };
     const token = localStorage.getItem('accessToken');
 
     this.client = new GraphQLClient(environment.gqlEndpoint, {
       headers: Object.assign({
           Authorization: 'Bearer ' + token,
-          ...additionalHeaders,
+          ...this.additionalHeaders,
         }),
       },
     );
@@ -30,15 +31,12 @@ export class GqlClientService {
    * @returns {void}
    */
   refreshClient(jwt?: string) {
-    const additionalHeaders = {
-      'x-pointmotion-user-type': 'staff',
-    };
     const token = jwt || localStorage.getItem('accessToken');
     if (token) {
       this.client = new GraphQLClient(environment.gqlEndpoint, {
         headers: Object.assign({
           Authorization: 'Bearer ' + token,
-          ...additionalHeaders,
+          ...this.additionalHeaders,
         }),
       });
     }

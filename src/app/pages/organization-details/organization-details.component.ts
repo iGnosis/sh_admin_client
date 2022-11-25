@@ -33,6 +33,11 @@ export class OrganizationDetailsComponent implements OnInit {
 
 
     this.organization = result.organization_by_pk;
+    this.formatTypeEnum();
+  }
+
+  formatTypeEnum() {
+    this.organization.type = this.organization.type.split('_').join(' ');
   }
 
   ngOnInit(): void {

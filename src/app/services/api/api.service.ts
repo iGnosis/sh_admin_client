@@ -31,8 +31,12 @@ export class ApiService {
     }, false);
   }
 
-  async generateOrganizationInviteCode(): Promise<any> {
-    return this.client.req(GqlConstants.GENERATE_ORGANIZATION_INVITE_CODE);
+  async createOrganization(): Promise<any> {
+    return this.client.req(GqlConstants.CREATE_ORGANIZATION);
+  }
+
+  async generateOrganizationInviteCode(organizationId: string): Promise<any> {
+    return this.client.req(GqlConstants.GENERATE_ORGANIZATION_INVITE_CODE, { organizationId });
   }
 
   async updateInvitationCodeExpiry(inviteCode: string, expiryAt: string): Promise<any> {

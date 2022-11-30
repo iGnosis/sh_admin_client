@@ -23,12 +23,16 @@ export const GqlConstants = {
         }
       }
     }`,
+    CREATE_ORGANIZATION: `
+    mutation CreateOrganization {
+      insert_organization_one(object: {}) {
+        orgId: id
+      }
+    }`,
     GENERATE_ORGANIZATION_INVITE_CODE: `
-    query GenerateOrganizationInviteCode {
-      generateOrganizationInviteCode {
-        data {
-          inviteCode
-        }
+    mutation GenerateOrganizationInviteCode($organizationId: uuid!) {
+      insert_invite_organization_one(object: {organizationId: $organizationId}) {
+        inviteCode
       }
     }
     `,

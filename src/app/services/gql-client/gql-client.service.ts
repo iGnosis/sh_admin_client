@@ -56,6 +56,7 @@ export class GqlClientService {
       const publicClient = new GraphQLClient(environment.gqlEndpoint, {
         headers: Object.assign({}, {
           'x-pointmotion-user-type': 'staff',
+          'x-organization-name': environment.organizationName
         }),
       });
       return publicClient.request(request, variables);

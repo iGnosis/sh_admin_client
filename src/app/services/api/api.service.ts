@@ -46,10 +46,11 @@ export class ApiService {
     });
   }
 
-  async sendOrganizationInvite(email: string, redirectUrl: string): Promise<any> {
+  async sendOrganizationInvite(email: string, redirectUrl: string, inviteCode: string): Promise<any> {
     return this.client.req(GqlConstants.SEND_ORGANIZATION_INVITE, {
       email,
       redirectUrl,
+      inviteCode,
     });
   }
 

@@ -44,8 +44,8 @@ export const GqlConstants = {
     }
     `,
     SEND_ORGANIZATION_INVITE: `
-    mutation SendOrganizationInviteViaEmail($email: String!, $redirectUrl: String!) {
-      inviteOrganizationViaEmail(email: $email, redirectUrl: $redirectUrl) {
+    mutation SendOrganizationInviteViaEmail($email: String!, $redirectUrl: String!, $inviteCode: String!) {
+      inviteOrganizationViaEmail(email: $email, redirectUrl: $redirectUrl, inviteCode: $inviteCode) {
         data {
           message
         }

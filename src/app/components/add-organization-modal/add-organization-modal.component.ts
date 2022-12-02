@@ -84,7 +84,7 @@ export class AddOrganizationModalComponent implements OnInit {
     emails = [...new Set(emails)];
 
     emails.forEach((email) => {
-      this.apiService.sendOrganizationInvite(email, this.redirectURL);
+      this.apiService.sendOrganizationInvite(email, this.redirectURL, this.inviteCode);
     });
     this.hasInvited = true;
   }

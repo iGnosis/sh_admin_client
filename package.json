@@ -4,6 +4,7 @@
   "scripts": {
     "conventional-changelog": "conventional-changelog",
     "start": "ng serve --port 4100 --configuration local",
+    "start:local-pure": "ng serve --port 4100 --configuration local-pure",
     "build": "mkdir dist; ng build",
     "build:prod": "mkdir dist; npm run build -- --configuration production --aot",
     "test": "ng test",

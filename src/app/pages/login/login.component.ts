@@ -68,6 +68,9 @@ export class LoginComponent implements OnInit {
         this.countryCode = `+${this.countryCode}`;
       }
       this.phoneNumber = event.target.phoneNumber.value;
+
+      this.countryCode = this.countryCode ? this.countryCode.trim() : ''
+      this.phoneNumber = this.phoneNumber ? this.phoneNumber.trim() : ''
       console.log('submit:countryCode:', this.countryCode);
       console.log('submit:phoneNumber:', this.phoneNumber);
 

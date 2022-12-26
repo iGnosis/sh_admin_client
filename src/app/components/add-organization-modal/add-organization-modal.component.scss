@@ -1,6 +1,20 @@
+@import '../../@theme/styles/variables';
 .modal.show {
     display: block;
 }
 input[readonly] {
     background-color: white;
+}
+.input-group.copied {
+  border: 2px solid $success;
+}
+::ng-deep {
+  .snackbar-primary {
+    .mat-simple-snack-bar-content {
+      color: #fff;
+    }
+    .mat-button-wrapper {
+      color: #2F51AE;
+    }
+  }
 }

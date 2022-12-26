@@ -3,11 +3,16 @@
     <div class="container-xl">
       <div>
         <div class="row custom_alignment p-5">
-          <div class="col-md-6 col-12 mb-3 mb-md-0">
+          <div class="col-md-6 col-9 mb-3 mb-md-0">
             <!-- Title -->
             <xng-breadcrumb separator=">"></xng-breadcrumb>
             <router-outlet></router-outlet>
             <h1 class="h2 mb-0 ls-tight heading_text mt-5 text-primary">{{organization.name | titlecase}}</h1>
+          </div>
+          <div class="col-md-6 col-3 d-flex justify-content-end align-items-center">
+            <a routerLink="edit" class="btn btn-sm btn-primary ms-2 px-14">
+              <i class="bi bi-pencil-square"></i>&nbsp;Edit
+            </a>
           </div>
         </div>
       </div>
@@ -20,11 +25,6 @@
           <!-- Title -->
           <h5>Account Details</h5>
           <!-- Button -->
-          <div class="ms-auto">
-            <a routerLink="edit" class="btn btn-sm btn-neutral ms-2 text-primary">
-              <i class="bi bi-pencil-square"></i>&nbsp;Edit Account Details
-            </a>
-          </div>
         </div>
         <div class="card-body pt-0">
           <div>

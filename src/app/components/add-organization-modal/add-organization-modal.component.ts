@@ -1,5 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 import { ApiService } from '../../services/api/api.service';
+import { Clipboard } from '@angular/cdk/clipboard';
+import { NbGlobalPosition, NbToastrService } from '@nebular/theme';
 
 @Component({
   selector: 'add-organization-modal',
@@ -12,15 +15,26 @@ export class AddOrganizationModalComponent implements OnInit {
   linkExpiry = false;
   expiryPeriod = '1';
   redirectURL = 'https://org.pointmotion.us/invite/';
-  inviteCode = '';
+  inviteCode = 'test';
   emails = '';
   hasInvited = false;
   isEmailValid = false;
+  copyStatusSubject: BehaviorSubject<string> = new BehaviorSubject('copy');
 
-  constructor(private apiService: ApiService) {
-  }
+  constructor(
+    private apiService: ApiService, 
+    private clipboard: Clipboard,
+    private toastrService: NbToastrService,
+  ) {}
 
   ngOnInit(): void {
+    this.copyStatusSubject.subscribe((status) => {
+      if (status === 'copied') {
+        setTimeout(() => {
+          this.copyStatusSubject.next('copy');
+        }, 2000);
+      }
+    });
   }
 
   toggleShowModal() {
@@ -39,12 +53,18 @@ export class AddOrganizationModalComponent implements OnInit {
   }
 
   copyInviteLink() {
-    const el = document.createElement('textarea');
-    el.value = this.redirectURL + this.inviteCode;
-    document.body.appendChild(el);
-    el.select();
-    document.execCommand('copy');
-    document.body.removeChild(el);
+    if (this.copyStatusSubject.getValue() === 'copy') {
+      this.clipboard.copy(this.redirectURL + this.inviteCode);
+      this.copyStatusSubject.next('copied');
+    }
+    this.toastrService.show('Copied to clipboard', '', {
+      position: 'bottom-start' as NbGlobalPosition,
+      duration: 2000,
+      destroyByClick: true,
+      preventDuplicates: true,
+      hasIcon: false,
+      icon: '',
+    });
   }
 
   validateEmail() {

@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GqlConstants } from '../../gql-constants';
 import { ApiService } from '../../services/api/api.service';
 import { JwtService } from '../../services/jwt/jwt.service';
 import { phone } from 'phone';
 import { GqlClientService } from '../../services/gql-client/gql-client.service';
+import jwtDecode from 'jwt-decode';
+import { JwtPayload } from '../../../types/global';
 
 @Component({
   selector: 'ngx-login',
@@ -68,6 +69,9 @@ export class LoginComponent implements OnInit {
         this.countryCode = `+${this.countryCode}`;
       }
       this.phoneNumber = event.target.phoneNumber.value;
+
+      this.countryCode = this.countryCode ? this.countryCode.trim() : ''
+      this.phoneNumber = this.phoneNumber ? this.phoneNumber.trim() : ''
       console.log('submit:countryCode:', this.countryCode);
       console.log('submit:phoneNumber:', this.phoneNumber);
 
@@ -148,29 +152,26 @@ export class LoginComponent implements OnInit {
       this.otpCode = event.target.otpCode.value;
       console.log('submit:otpCode:', this.otpCode);
 
-      // you should get back JWT in success response.
-      const resp = await this.apiService.verifyLoginOtp(this.countryCode,this.phoneNumber,parseInt(this.otpCode!));
+      try {
+        // you should get back JWT in success response.
+        const resp = await this.apiService.verifyLoginOtp(this.countryCode, this.phoneNumber, parseInt(this.otpCode!));
 
-      if (!resp || !resp.verifyLoginOtp || !resp.verifyLoginOtp.data.token) {
-        this.showError('That is not the code.');
-        return;
+        if (!resp || !resp.verifyLoginOtp || !resp.verifyLoginOtp.data.token) {
+          this.showError('Something went wrong.');
+          return;
+        }
+
+        // set user as well
+        this.jwtService.setToken(resp.verifyLoginOtp.data.token);
+
+        this.gqlClientService.refreshClient();
+        this.router.navigate(['/app/organizations']);
+      } catch (err) {
+        if (JSON.stringify(err).includes('Invalid OTP')) {
+          this.showError('That is not the code.');
+          return;
+        }
       }
-
-      // set user as well
-      this.jwtService.setToken(resp.verifyLoginOtp.data.token);
-
-      const accessTokenData = this.decodeJwt(resp.verifyLoginOtp.data.token);
-      const userId =
-        accessTokenData['https://hasura.io/jwt/claims']['x-hasura-user-id'];
-      // this.userService.set({
-      //   id: userId,
-      // });
-      console.log('user set successfully');
-
-      this.gqlClientService.refreshClient();
-
-      this.router.navigate(['/app/organizations']);
     }
   }
-
 }

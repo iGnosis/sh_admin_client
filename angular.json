@@ -154,7 +154,33 @@
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
-                  "with": "src/environments/environment.local.ts"
+                  "with": "src/environments/local/environment.local.default.ts"
+                }
+              ]
+            },
+            "local-pure": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "3mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/local/environment.local.pure.ts"
                 }
               ]
             }
@@ -172,6 +198,9 @@
             },
             "local": {
               "browserTarget": "ngx-admin-demo:build:local"
+            },
+            "local-pure": {
+              "browserTarget": "ngx-admin-demo:build:local-pure"
             }
           }
         },
@@ -221,17 +250,6 @@
               }
             ]
           }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "src/tsconfig.app.json",
-              "src/tsconfig.spec.json"
-            ],
-            "typeCheck": true,
-            "exclude": []
-          }
         }
       }
     },
@@ -245,15 +263,6 @@
           "options": {
             "protractorConfig": "./protractor.conf.js",
             "devServerTarget": "ngx-admin-demo:serve"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "e2e/tsconfig.e2e.json"
-            ],
-            "exclude": []
           }
         }
       }

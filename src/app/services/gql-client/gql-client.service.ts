@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 export class GqlClientService {
   private client: GraphQLClient;
   private additionalHeaders = {
-    'x-pointmotion-user-type': 'staff',
+    'x-pointmotion-user-type': 'sh_admin',
     'x-organization-name': environment.organizationName,
   };
 
@@ -55,7 +55,7 @@ export class GqlClientService {
     else {
       const publicClient = new GraphQLClient(environment.gqlEndpoint, {
         headers: Object.assign({}, {
-          'x-pointmotion-user-type': 'staff',
+          'x-pointmotion-user-type': 'sh_admin',
           'x-organization-name': environment.organizationName
         }),
       });

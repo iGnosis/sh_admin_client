@@ -39,3 +39,25 @@
 body {
   background-color:  var(--x-body-bg);
 }
+
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 1056;
+  #cdk-overlay-0 {
+    position: absolute !important;
+    left: 50%;
+    bottom: 5%;
+    background: #1a202c;
+    border-radius: 5px;
+    color: white;
+    transform: translateX(-50%);
+    font-weight: bold;
+    overflow: hidden;
+    .ng-trigger.ng-trigger-fadeIn.destroy-by-click {
+      width: auto;
+       > div {
+        display: flex;
+       }
+    }
+  }
+}

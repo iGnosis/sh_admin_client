@@ -12,6 +12,7 @@ export class OrganizationsComponent implements OnInit {
   organizations = [];
   filteredOrganizations = [];
   searchQuery: string;
+  nonOnboardedOrganizations = 0;
 
   constructor(private apiService: ApiService) { }
 
@@ -24,7 +25,15 @@ export class OrganizationsComponent implements OnInit {
     const result = await this.apiService.getOrganizationsList();
     if (!result.organization) return;
 
-    this.organizations = result.organization;
+    this.nonOnboardedOrganizations = 0;
+    this.organizations = result.organization.filter((organization) => {
+      if (organization.name) {
+        return true;
+      } else {
+        this.nonOnboardedOrganizations++;
+        return false;
+      }
+    });
     this.filteredOrganizations = this.organizations;
   }
 

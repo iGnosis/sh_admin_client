@@ -23,6 +23,7 @@ import {
 import { PrivateComponent } from './layouts/private/private.component';
 import { PrivateGuard } from './guards/private-guard';
 import { PublicGuard } from './guards/public-guard';
+import { OverlayContainer } from '@angular/cdk/overlay';
 
 @NgModule({
   declarations: [AppComponent, PrivateComponent],
@@ -46,6 +47,7 @@ import { PublicGuard } from './guards/public-guard';
   providers: [
     PrivateGuard,
     PublicGuard,
+    OverlayContainer,
   ],
   bootstrap: [AppComponent],
 })

@@ -25,10 +25,10 @@
           <ng-container *ngIf="inviteCode !== ''">
             <h5 class="modal-title">Link</h5>
             <div class="my-2">
-              <div class="input-group input-group-inline">
+              <div class="input-group input-group-inline shadow-none" [class.copied]="copyStatusSubject.getValue() === 'copied'">
                 <input type="text" class="form-control" placeholder="username" [value]="redirectURL + inviteCode" aria-label="username" readonly>
-                <span class="input-group-text cursor-pointer" id="" (click)="copyInviteLink()">
-                  COPY
+                <span class="input-group-text cursor-pointer" [class.text-success]="copyStatusSubject.getValue() === 'copied'" nbButton (click)="copyInviteLink()">
+                  {{copyStatusSubject.getValue() | titlecase}}
                 </span>
               </div>
             </div>

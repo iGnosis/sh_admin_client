@@ -1,13 +1,12 @@
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
-import {
-  NbAuthComponent,
-  NbLoginComponent,
-  NbLogoutComponent,
-  NbRegisterComponent,
-  NbRequestPasswordComponent,
-  NbResetPasswordComponent,
-} from '@nebular/auth';
+import { OrganizationsComponent } from './pages/organizations/organizations.component';
+import { PublicGuard } from './guards/public-guard';
+import { PrivateGuard } from './guards/private-guard';
+import { LoginComponent } from './pages/login/login.component';
+import { PrivateComponent } from './layouts/private/private.component';
+import { OrganizationDetailsComponent } from './pages/organization-details/organization-details.component';
+import { EditOrganizationComponent } from './pages/edit-organization/edit-organization.component';
 
 export const routes: Routes = [
   {
@@ -15,38 +14,39 @@ export const routes: Routes = [
     loadChildren: () => import('./pages/pages.module')
       .then(m => m.PagesModule),
   },
+  { path: '', redirectTo: 'public/login', pathMatch: 'full' },
   {
-    path: 'auth',
-    component: NbAuthComponent,
+    path: 'public', canActivateChild: [PublicGuard], children: [
+      { path: 'login', component: LoginComponent }
+    ]
+  },
+  {
+    path: 'app', component: PrivateComponent, canActivateChild: [PrivateGuard], 
+    data: {
+      breadcrumb: {
+        label: 'Home',
+        info: 'Home',
+        routeInterceptor: ()=> {
+          return '/app/organizations';
+        }
+      },
+    },
     children: [
-      {
-        path: '',
-        component: NbLoginComponent,
-      },
-      {
-        path: 'login',
-        component: NbLoginComponent,
-      },
-      {
-        path: 'register',
-        component: NbRegisterComponent,
-      },
-      {
-        path: 'logout',
-        component: NbLogoutComponent,
-      },
-      {
-        path: 'request-password',
-        component: NbRequestPasswordComponent,
-      },
-      {
-        path: 'reset-password',
-        component: NbResetPasswordComponent,
+      { path: 'organizations', data: { breadcrumb: 'Organizations' }, component: OrganizationsComponent },
+      { 
+        path: 'organization', data: { breadcrumb: 'Organizations' },
+        children: [
+          { path: '', redirectTo: '/app/organizations', pathMatch: 'full' },
+          { 
+              path: ':id', children: [
+                { path: '', component: OrganizationDetailsComponent, pathMatch: 'full' },
+                { path: 'edit', component: EditOrganizationComponent, data: { breadcrumb: 'Edit Account Details' } },
+            ] 
+          },
+        ] 
       },
     ],
   },
-  { path: '', redirectTo: 'auth', pathMatch: 'full' },
-  { path: '**', redirectTo: 'auth' },
 ];
 
 const config: ExtraOptions = {

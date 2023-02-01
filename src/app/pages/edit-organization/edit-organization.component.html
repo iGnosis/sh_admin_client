@@ -1,0 +1,49 @@
+<!-- Header -->
+<header class="px-3 px-lg-7 pt-7 custom_header bg-white">
+    <div class="container-xl">
+      <div>
+        <div class="row custom_alignment p-5">
+          <div class="col-9 mb-3 mb-md-0">
+            <!-- Title -->
+            <xng-breadcrumb separator=">"></xng-breadcrumb>
+            <router-outlet></router-outlet>
+            <h1 class="h2 mb-0 ls-tight heading_text mt-5 text-primary">Edit Organization Details</h1>
+          </div>
+          <!-- Button -->
+          <div class="col mt-auto">
+            <a class="btn btn-sm btn-primary ms-2 text-primary text-white px-5" [class.disabled]="!allowSavingChanges" disabled="!allowSavingChanges" (click)="saveDetails()">
+              <nb-icon class="w-4" icon="save-outline"></nb-icon>&nbsp;Save Changes
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+</header>
+
+<div class="container my-5 row">
+    <div class="card shadow-3 col-8 offset-2">
+        <div class="card-header d-flex align-items-center">
+          <!-- Title -->
+          <h5>Basic Information</h5>
+        </div>
+        <div class="card-body pt-0">
+          <div>
+            <div class="col-md-12 mb-5">
+              <div class="">
+                <label class="form-label" for="formInputExample">Organization Name</label>
+                <input type="text" class="form-control form-control-sm" id="formInputExample" [(ngModel)]="organization.name" (ngModelChange)="validateForm()">
+              </div>
+            </div>
+            <div class="col-md-12 mb-5">
+              <div class="">
+                <label class="form-label" for="formInputExample">Organization Type</label>
+                <select class="form-select form-select-sm" [(ngModel)]="organization.type" (change)="validateForm()">
+                    <option value="senior_home_facility">Senior Home Facility</option>
+                    <option value="clinic">Clinic</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

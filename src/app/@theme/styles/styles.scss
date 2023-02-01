@@ -1,5 +1,8 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
+@import './variables';
+
+@import "@webpixels/css/core/functions";
 // themes - our custom or/and out of the box themes
 @import 'themes';
 
@@ -7,10 +10,11 @@
 @import '~@nebular/theme/styles/globals';
 @import '~@nebular/auth/styles/globals';
 
-@import '~bootstrap/scss/functions';
-@import '~bootstrap/scss/variables';
-@import '~bootstrap/scss/mixins';
-@import '~bootstrap/scss/grid';
+// Webpixels' CSS
+@import "@webpixels/css/base";
+@import "@webpixels/css/forms";
+@import "@webpixels/css/components";
+@import "@webpixels/css/utilities";
 
 // loading progress bar theme
 @import './pace.theme';
@@ -31,3 +35,29 @@
 
   @include nb-overrides();
 };
+
+body {
+  background-color:  var(--x-body-bg);
+}
+
+.cdk-overlay-container {
+  position: fixed;
+  z-index: 1056;
+  #cdk-overlay-0 {
+    position: absolute !important;
+    left: 50%;
+    bottom: 5%;
+    background: #1a202c;
+    border-radius: 5px;
+    color: white;
+    transform: translateX(-50%);
+    font-weight: bold;
+    overflow: hidden;
+    .ng-trigger.ng-trigger-fadeIn.destroy-by-click {
+      width: auto;
+       > div {
+        display: flex;
+       }
+    }
+  }
+}

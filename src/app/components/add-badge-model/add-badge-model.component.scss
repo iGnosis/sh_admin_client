@@ -1,0 +1,9 @@
+@import '../../@theme/styles/variables';
+
+.modal.show {
+  display: block;
+}
+
+input[readonly] {
+  background-color: white;
+}

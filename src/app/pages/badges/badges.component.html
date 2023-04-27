@@ -1,0 +1,89 @@
+<!-- Header -->
+<header class="px-3 px-lg-7 pt-7 custom_header bg-white">
+  <div class="container-xl">
+    <div>
+      <div class="row custom_alignment p-5">
+        <div class="col-md-6 col-12 mb-3 mb-md-0">
+          <!-- Title -->
+          <xng-breadcrumb separator=">"></xng-breadcrumb>
+          <router-outlet></router-outlet>
+          <h1 class="h2 mb-0 ls-tight heading_text mt-5 text-primary">Sound Health Badges</h1>
+        </div>
+        <!-- Actions -->
+        <div class="col-md-6 col-12 text-md-end align-items-end justify-content-end d-flex">
+          <a (click)="toggleShowModal()" class="btn d-inline-flex btn-sm custom_btn_class btn-primary mx-1">
+            <span class=" pe-2">
+              <i class="bi bi-plus "></i>
+            </span>
+            <span>Add Badge</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Rewards list -->
+<div class="card shadow-none m-5">
+  <div class="d-flex align-items-center px-5 py-3">
+    <h4>Badge List</h4>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-hover table-nowrap">
+      <thead class="table-light">
+        <tr>
+          <th class="text-lg" scope="col">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckAll">
+              <label class="form-check-label" for="flexCheckAll"></label>
+            </div>
+          </th>
+          <th scope="col">Badge Name</th>
+          <th scope="col">Created At</th>
+          <th scope="col">Dimension</th>
+          <th scope="col">Tier</th>
+          <th scope="col">Status</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let badge of badges" class="cursor-pointer">
+          <td class="text-lg" scope="col">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" value="" id="flexCheckRow1">
+              <label class="form-check-label" for="flexCheckRow1"></label>
+            </div>
+          </td>
+          <td [routerLink]="'/app/organization/' + 1233">
+            <a class="text-heading font-semibold">
+              {{ badge.name }}
+            </a>
+          </td>
+          <td>
+            <span>{{ badge.createdAt | date}}</span>
+          </td>
+          <td>
+            <span>{{ badge.dimension }}</span>
+          </td>
+          <td>
+            <span>{{ badge.tier }}</span>
+          </td>
+          <td>
+            <span>{{ badge.status }}</span>
+          </td>
+          <td class="text-end">
+            <div class="dropdown">
+              <p class="text-muted" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="bi bi-three-dots-vertical"></i>
+              </p>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+  <!-- Add Badge Modal -->
+<add-badge-model [showBadgeModal]="showBadgeModal"
+  (modalStateChange)="toggleShowModal()"></add-badge-model>

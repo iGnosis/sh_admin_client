@@ -1,0 +1,83 @@
+<div class="modal animated fadeIn" [class.show]="showBadgeModal" tabindex="-1"
+  aria-labelledby="modal_example" aria-hidden="true" style="background-color: rgba(0,0,0,0.4);">
+  <div class="modal-dialog modal-dialog-centered" style="max-width: 50vw;">
+    <div class="modal-content shadow-3">
+      <div class="modal-header">
+        <div>
+          <h3 class="modal-title text-primary">Add Badge</h3>
+          <p class="mt-2 text-sm text-black">Create a new badge.</p>
+        </div>
+        <div class="text-xs ms-auto mb-auto">
+          <button (click)="toggleShowModal()" type="button" class="btn-close" data-bs-dismiss="modal"
+            aria-label="Close"></button>
+        </div>
+      </div>
+      <div class="modal-body border-bottom">
+
+      <div class="container">
+        <form class="needs-validation">
+          <div class="row mb-3">
+            <div class="col">
+              <label for="name" class="form-label">Badge Name:</label>
+              <input type="text" id="name" class="form-control" placeholder="Enter badge name" aria-label="badge name"
+                (input)="setInput('name', $event)" name="name" [ngModel]="badge.name" required>
+            </div>
+            <div class="col">
+              <label for="tier" class="form-label">Badge Tier:</label>
+              <select (change)="setInput('tier', $event)" id="tier" class="form-select" name="tier" [ngModel]="badge.tier">
+                <option value="bronze">Bronze</option>
+                <option value="silver">Silver</option>
+                <option value="gold">Gold</option>
+                <option value="platinum">Platinum</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Badge Description:</label>
+            <textarea (input)="setInput('description', $event)" id="description" class="form-control"
+              placeholder="Enter badge description" aria-label="badge description" name="description" [ngModel]="badge.description"></textarea>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="metric" class="form-label">Badge Metrics:</label>
+              <select (change)="setInput('metric', $event)" id="metric" class="form-select"
+                [ngModel]="badge.metric" name="metric">
+                <option value="patient_streak">patient_streak</option>
+                <option value="patient_total_activity_duration">patient_total_activity_duration</option>
+              </select>
+            </div>
+            <div class="col">
+              <label for="minVal" class="form-label">Minimum Metric Value:</label>
+              <input (input)="setInput('minVal', $event)" value="0" type="number" id="minVal" class="form-control"
+                placeholder="Enter minimum metric value" aria-label="minimum metric value" name="minVal" [ngModel]="badge.minVal">
+            </div>
+            <div class="col">
+              <label for="maxVal" class="form-label">Maximum Metric Value:</label>
+              <input (input)="setInput('maxVal', $event)" value="0" type="number" id="maxVal" class="form-control"
+                placeholder="Enter maximum metric value" aria-label="maximum metric value" name="maxVal" [ngModel]="badge.maxVal">
+            </div>
+          </div>
+          <div class="row mb-3">
+            <div class="col">
+              <label for="badgeType" class="form-label">Badge Type:</label>
+              <select (change)="setInput('badgeType', $event)" id="badgeType" class="form-select" [ngModel]="badge.badgeType"
+                name="badgeType">
+                <option value="singleUnlock">Single Unlock</option>
+                <option value="unlimitedUnlock">Unlimited Unlock</option>
+              </select>
+            </div>
+          </div>
+          <!-- We may not need dimension. -->
+          <!-- <div class="mb-3">
+            <label for="badgeDimension" class="form-label">Badge Dimension:</label>
+            <input (input)="setInput('badgeDimension', $event)" type="text" id="badgeDimension" class="form-control"
+              placeholder="Enter badge dimension" aria-label="badge dimension" [ngModel]="badgeDimension">
+          </div> -->
+          <button (click)="saveBadge()" type="submit" class="btn btn-primary">Save</button>
+        </form>
+      </div>
+
+      </div>
+    </div>
+  </div>
+</div>

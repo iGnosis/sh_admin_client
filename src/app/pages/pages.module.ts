@@ -15,6 +15,8 @@ import { OrganizationDetailsComponent } from './organization-details/organizatio
 import { EditOrganizationComponent } from './edit-organization/edit-organization.component';
 import { NbEvaIconsModule } from '@nebular/eva-icons';
 import { FormsModule } from '@angular/forms';
+import { BadgesComponent } from './badges/badges.component';
+import { AddBadgeModelComponent } from '../components/add-badge-model/add-badge-model.component';
 
 @NgModule({
   imports: [
@@ -34,8 +36,10 @@ import { FormsModule } from '@angular/forms';
     OrganizationsComponent,
     LoginComponent,
     AddOrganizationModalComponent,
+    AddBadgeModelComponent,
     OrganizationDetailsComponent,
     EditOrganizationComponent,
+    BadgesComponent,
   ],
 })
 export class PagesModule {

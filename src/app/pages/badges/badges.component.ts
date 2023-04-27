@@ -26,6 +26,8 @@ export class BadgesComponent implements OnInit {
 
   toggleShowModal() {
     this.showBadgeModal = !this.showBadgeModal;
-    console.log('toggleShowModal:this.showBadgeModal', this.showBadgeModal);
+    if (!this.showBadgeModal) {
+      this.fetchBadges();
+    }
   }
 }

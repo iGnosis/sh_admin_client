@@ -1,6 +1,4 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { BadgeTier, BadgeType } from '../../../types/global';
-import { BadgeMetric } from '../../../types/global';
 import { Badge } from '../../../types/global';
 import { GqlClientService } from '../../services/gql-client/gql-client.service';
 import { GqlConstants } from '../../gql-constants';
@@ -16,6 +14,7 @@ export class AddBadgeModelComponent implements OnInit {
   @Input() showBadgeModal: boolean = false;
   @Output() modalStateChange = new EventEmitter();
   badge: Partial<Badge> = {};
+  badgeFormInvalid = true;
 
   constructor(
     private gqlService: GqlClientService,
@@ -46,6 +45,23 @@ export class AddBadgeModelComponent implements OnInit {
 
     // we may not need dimension column.
     this.badge.dimension = 'profile';
+
+    this.validateForm()
+  }
+
+  validateForm() {
+    if (
+      this.badge.name &&
+      this.badge.description &&
+      this.badge.metric &&
+      this.badge.minVal &&
+      this.badge.maxVal &&
+      this.badge.badgeType
+    ) {
+      this.badgeFormInvalid = false;
+    } else {
+      this.badgeFormInvalid = true;
+    }
   }
 
   toggleShowModal() {

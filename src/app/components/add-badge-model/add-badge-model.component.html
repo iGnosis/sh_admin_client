@@ -73,7 +73,9 @@
             <input (input)="setInput('badgeDimension', $event)" type="text" id="badgeDimension" class="form-control"
               placeholder="Enter badge dimension" aria-label="badge dimension" [ngModel]="badgeDimension">
           </div> -->
-          <button (click)="saveBadge()" type="submit" class="btn btn-primary">Save</button>
+          <div class="text-end">
+            <button (click)="saveBadge()" type="submit" class="btn btn-primary" [disabled]="badgeFormInvalid">Save Badge</button>
+          </div>
         </form>
       </div>
 

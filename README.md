@@ -6,6 +6,9 @@ The code is based on [ngx-admin](https://github.com/akveo/ngx-admin) build on Ne
 
 ## Getting Started
 
+### Requirements
+[Node.js](https://nodejs.org/en) >= v14.16
+
 ### Local setup
 
 1. Use the package manager [npm](https://www.npmjs.com/) to install the required dependencies
